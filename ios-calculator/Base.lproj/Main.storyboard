@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +10,55 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ios_calculator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTo-Gl-6PG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" horizontalHuggingPriority="254" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="h2m-L2-yD0">
+                                        <rect key="frame" x="10" y="211.5" width="355" height="445.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSV-wd-zRb">
+                                        <rect key="frame" x="10" y="100" width="355" height="101.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="85"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="JSV-wd-zRb" firstAttribute="top" secondItem="fTo-Gl-6PG" secondAttribute="top" constant="100" id="4mj-hF-QRM"/>
+                                    <constraint firstAttribute="trailing" secondItem="h2m-L2-yD0" secondAttribute="trailing" constant="10" id="IoE-0C-iUt"/>
+                                    <constraint firstAttribute="trailing" secondItem="JSV-wd-zRb" secondAttribute="trailing" constant="10" id="Wac-tV-3x2"/>
+                                    <constraint firstItem="h2m-L2-yD0" firstAttribute="top" secondItem="JSV-wd-zRb" secondAttribute="bottom" constant="10" id="WbC-VR-bkN"/>
+                                    <constraint firstItem="JSV-wd-zRb" firstAttribute="width" secondItem="h2m-L2-yD0" secondAttribute="width" id="aih-Ra-9Ka"/>
+                                    <constraint firstItem="h2m-L2-yD0" firstAttribute="leading" secondItem="fTo-Gl-6PG" secondAttribute="leading" constant="10" id="coB-e9-2gk"/>
+                                    <constraint firstAttribute="bottom" secondItem="h2m-L2-yD0" secondAttribute="bottom" constant="10" id="oWU-uh-fc7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fTo-Gl-6PG" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="2IB-rG-2Pm"/>
+                            <constraint firstItem="fTo-Gl-6PG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4Gw-4c-3pQ"/>
+                            <constraint firstItem="fTo-Gl-6PG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="CwE-ac-LPd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fTo-Gl-6PG" secondAttribute="trailing" id="rIN-Hw-G0J"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="displayLbl" destination="JSV-wd-zRb" id="JgL-H2-WWJ"/>
+                        <outlet property="holder" destination="fTo-Gl-6PG" id="IFo-x5-yHc"/>
+                        <outlet property="numbersHolder" destination="h2m-L2-yD0" id="j2O-MX-3Mx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="28.037383177570092" y="67.386609071274307"/>
         </scene>
     </scenes>
 </document>
