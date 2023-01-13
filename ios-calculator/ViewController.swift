@@ -15,7 +15,9 @@ class customBtn: UIButton {
     }
 }
 
-class ViewController: UIViewController {
+public class CalculatorViewController: UIViewController {
+    
+    public var presenter: CalculatorPresenter?
     
     var userInput = ""
     var parameter1: String? = ""
@@ -29,11 +31,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var displayLbl: UILabel!
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func viewDidLayoutSubviews() {
+    public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupButtons()
     }
@@ -236,6 +238,21 @@ class ViewController: UIViewController {
         showResult()
     }
 }
+
+//extension ViewController: CalculatorViewController {
+//    public var presenter: CalculatorPresenter? {
+//        get {
+//            <#code#>
+//        }
+//        set {
+//            <#code#>
+//        }
+//    }
+//
+//    public func showResult(_ model: CalculatorModel) {
+//
+//    }
+//}
 
 
 
