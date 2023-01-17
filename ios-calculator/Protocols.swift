@@ -8,47 +8,37 @@
 import Foundation
 
 //Presenter -> ViewController
-public protocol CalculatorViewControllerProtocol: AnyObject {
-    var presenter: CalculatorPresenterProtocol? { get set }
-    
-    func showResult(_ model: CalculatorModel)
+public protocol ViewControllerProtocol: AnyObject {
+    func showResult(model: CalculatorModel)
 }
 
 //ViewController -> Presenter
-public protocol CalculatorPresenterProtocol: AnyObject {
-    var viewController: CalculatorViewControllerProtocol? { get set }
-    var interactor: CalculatorInteractorInputProtocol? { get set }
-    
-    func addDigit(_ digit: Character)
-    func addOperation(_ operation: Character)
+public protocol PresenterProtocol: AnyObject {
+    func addDigit(digit: Int)
+    func addOperation(operation: Character)
     func calculateResult()
     func clearAll()
     
-    func formViewModel(_ model: CalculatorModel)
+    func formViewModel()
 }
 
 // Presenter -> Interactor
-public protocol CalculatorInteractorInputProtocol: AnyObject {
-    var presenter: CalculatorInteractorOutputProtocol? { get set }
-    var worker: CalculatorWorkerProtocol? { get set }
-    
-    func getOperation()
-    func getDigit()
-    func getClearCmd()
-    func getResultCmd()
+public protocol InteractorInputProtocol: AnyObject {
+    func getOperation(model: CalculatorModel, operation: Character)
+    func getDigit(model: CalculatorModel, digit: Int)
+    func getClearCmd(model: CalculatorModel)
+    func getResultCmd(model: CalculatorModel)
 }
 
 // Interactor -> Presenter
-public protocol CalculatorInteractorOutputProtocol: AnyObject {
-    
+public protocol InteractorOutputProtocol: AnyObject {
     func getResultFromWorker()
-    
 }
 
 // Worker 
-public protocol CalculatorWorkerProtocol: AnyObject {
-    func appendInput()
-    func updateFunction()
-    func calculateResult()
-    func clearAll()
+public protocol WorkerProtocol: AnyObject {
+    func appendInput(model: CalculatorModel, digit: Int)
+    func processOperation(model: CalculatorModel, operation: Character)
+    func calculateResult(model: CalculatorModel)
+    func clearAll(model: CalculatorModel)
 }
