@@ -8,7 +8,7 @@
 import Foundation
 
 public class Worker: WorkerProtocol {
-    
+
     public func appendInput(model: CalculatorModel, digit: Int) {
         if digit == 0 {
             if model.displayText != "0" {
@@ -22,64 +22,37 @@ public class Worker: WorkerProtocol {
             model.displayText = model.userInput
         }
     }
-    
-    public func processOperation(model: CalculatorModel, operation: Character) {
-        switch operation {
-        case "+":
-            if model.userInput != "" {
-                if model.parameter1 != nil {
-                    calculateResult(model: model)
-                }
-                model.parameter1 = model.userInput
-                model.userInput = ""
+
+    private func executeOperation(model: CalculatorModel) {
+        if model.userInput != "" {
+            if model.parameter1 != nil {
+                calculateResult(model: model)
             }
-            model.function  = "+"
-        case "-":
-            if model.userInput != "" {
-                if model.parameter1 != nil {
-                    calculateResult(model: model)
-                }
-                model.parameter1 = model.userInput
-                model.userInput = ""
-            }
-            model.function  = "-"
-        case "×":
-            if model.userInput != "" {
-                if model.parameter1 != nil {
-                    calculateResult(model: model)
-                }
-                model.parameter1 = model.userInput
-                model.userInput = ""
-            }
-            model.function  = "×"
-        case "÷":
-            if model.userInput != "" {
-                if model.parameter1 != nil {
-                    calculateResult(model: model)
-                }
-                model.parameter1 = model.userInput
-                model.userInput = ""
-            }
-            model.function  = "÷"
-        case "±":
-            let num = Double(model.userInput)
-            if let num = num, model.userInput != "" {
-                model.displayText = ""
-                let result = -num
-                if floor(result) == result {
-                    model.userInput = String(Int(result))
-                } else {
-                    model.userInput = String(result)
-            }
-                model.displayText = model.userInput
+            model.parameter1 = model.userInput
+            model.userInput = ""
         }
-        case ",":
-            if let _ = Double(model.userInput + ".") {
-                model.displayText = ""
-                model.userInput += "."
-                model.displayText = model.userInput
-            }
-        case "%":
+    }
+
+    public func processBinaryOperation(model: CalculatorModel, operation: BinaryOperation) {
+        switch operation {
+        case .add:
+            executeOperation(model: model)
+            model.function = "+"
+        case .subtract:
+            executeOperation(model: model)
+            model.function = "-"
+        case .multiply:
+            executeOperation(model: model)
+            model.function = "×"
+        case .delete:
+            executeOperation(model: model)
+            model.function = "÷"
+        }
+    }
+
+    public func processUnaryOperation(model: CalculatorModel, operation: UnaryOperation) {
+        switch operation {
+        case .percent:
             if model.userInput != "" {
                 let num = Double(model.userInput)
                 if let num = num {
@@ -97,43 +70,64 @@ public class Worker: WorkerProtocol {
                     }
                 }
             }
-        default:
-            print("default")
+        case .makeDouble:
+            if Double(model.userInput + ".") != nil {
+                model.displayText = ""
+                model.userInput += "."
+                model.displayText = model.userInput
+            }
+        case .changeSign:
+            let num = Double(model.userInput)
+            if let num = num, model.userInput != "" {
+                model.displayText = ""
+                let result = -num
+                if floor(result) == result {
+                    model.userInput = String(Int(result))
+                } else {
+                    model.userInput = String(result)
+            }
+                model.displayText = model.userInput
+        }
         }
     }
-    
+
     public func calculateResult(model: CalculatorModel) {
-        model.parameter2 = model.userInput
-        if let parameter1 = model.parameter1, let parameter2 = model.parameter2 {
-            let p1 = Double(parameter1)
-            let p2 = Double(parameter2)
-            if let num1 = p1 {
-                if let num2 = p2 {
-                    switch model.function {
-                    case "÷":
-                        model.result = num1 / num2
-                    case "×":
-                        model.result = num1 * num2
-                    case "+":
-                        model.result = num1 + num2
-                    case "-":
-                        model.result = num1 - num2
-                    default:
-                        model.result = 0
-                    }
-                    if floor(model.result!) == model.result! {
-                        model.displayText = String(Int(model.result!))
-                        model.userInput = String(Int(model.result!))
-                    } else {
-                        model.displayText = String(model.result!)
-                        model.userInput = String(model.result!)
+        if !(model.function == "÷" && model.userInput == "0") {
+            model.parameter2 = model.userInput
+            if let parameter1 = model.parameter1, let parameter2 = model.parameter2 {
+                let pr1 = Double(parameter1)
+                let pr2 = Double(parameter2)
+                if let num1 = pr1 {
+                    if let num2 = pr2 {
+                        switch model.function {
+                        case "÷":
+                            model.result = num1 / num2
+                        case "×":
+                            model.result = num1 * num2
+                        case "+":
+                            model.result = num1 + num2
+                        case "-":
+                            model.result = num1 - num2
+                        default:
+                            model.result = 0
+                        }
+                        if floor(model.result!) == model.result! {
+                            model.displayText = String(Int(model.result!))
+                            model.userInput = String(Int(model.result!))
+                        } else {
+                            model.displayText = String(model.result!)
+                            model.userInput = String(model.result!)
+                        }
                     }
                 }
             }
+            model.parameter1 = nil
+        } else {
+            clearAll(model: model)
+            model.displayText = "Error"
         }
-        model.parameter1 = nil
     }
-    
+
     public func clearAll(model: CalculatorModel) {
         model.displayText = "0"
         model.function = nil
@@ -142,5 +136,5 @@ public class Worker: WorkerProtocol {
         model.userInput = ""
         model.result = nil
     }
-    
+
 }

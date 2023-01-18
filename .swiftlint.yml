@@ -1,0 +1,5 @@
+line_length:
+- 200 # warning
+- 300 # error
+cyclomatic_complexity:
+  ignores_case_statements: true

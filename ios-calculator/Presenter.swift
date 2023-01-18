@@ -9,24 +9,30 @@ import Foundation
 import UIKit
 
 public class Presenter: PresenterProtocol {
-    
+
     weak var output: ViewControllerProtocol?
     public var interactor: InteractorInputProtocol?
     private let calculatorModel: CalculatorModel
-    
+
     public init(model: CalculatorModel?) {
         if let model = model {
             self.calculatorModel = model
         } else {
-            self.calculatorModel = CalculatorModel(userInput: "", displayText: "0", parameter1: nil, parameter2: nil, function: nil, result: nil, history: nil)
+            self.calculatorModel = CalculatorModel(
+                userInput: "0",
+                displayText: "0",
+                parameter1: nil,
+                parameter2: nil,
+                function: nil,
+                result: nil,
+                history: nil)
         }
     }
-    
-    
+
     public func addDigit(digit: Int) {
         interactor?.getDigit(model: calculatorModel, digit: digit)
     }
-    public func addOperation(operation: Character) {
+    public func addOperation(operation: String) {
         interactor?.getOperation(model: calculatorModel, operation: operation)
     }
     public func calculateResult() {
