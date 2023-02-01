@@ -30,13 +30,13 @@ public class CalculatorModel {
     public var result: Double?
     public var history: [Operation]?
 
-       public init(userInput: String, displayText: String, parameter1: String?, parameter2: String?, function: Character?, result: Double?, history: [Operation]?) {
-           self.userInput = userInput
-           self.displayText = displayText
-           self.parameter1 = parameter1
-           self.parameter2 = parameter2
-           self.function = function
-           self.result = result
-           self.history = history
-       }
+    public init(userInput: String, displayText: String, parameter1: String?, parameter2: String?, function: Character?, result: Double?, history: [Operation]?) {
+        self.userInput = userInput
+        self.displayText = displayText
+        self.parameter1 = parameter1
+        self.parameter2 = parameter2
+        self.function = function
+        self.result = result
+        self.history = history
+    }
 }

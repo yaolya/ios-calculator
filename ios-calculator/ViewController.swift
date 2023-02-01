@@ -72,10 +72,10 @@ public class ViewController: UIViewController {
         let arr: [String] = ["÷", "×", "-", "+", "="]
         for btnNumber in 0...4 {
             let btn = CustomBtn(frame: CGRect(
-                    x: buttonSize * CGFloat(3),
-                    y: buttonSize*CGFloat(btnNumber),
-                    width: buttonSize,
-                    height: buttonSize))
+                x: buttonSize * CGFloat(3),
+                y: buttonSize*CGFloat(btnNumber),
+                width: buttonSize,
+                height: buttonSize))
             btn.setTitleColor(.black, for: .normal)
             btn.backgroundColor = .white
             btn.titleLabel?.font =  UIFont.systemFont(ofSize: buttonFontSize)
@@ -143,7 +143,7 @@ public class ViewController: UIViewController {
     @objc func operationPressed(_ sender: UIButton) {
         if let buttonTitle = sender.title(for: .normal) {
             presenter?.addOperation(operation: buttonTitle)
-          }
+        }
     }
 
     @objc func clearAll(_ sender: UIButton) {

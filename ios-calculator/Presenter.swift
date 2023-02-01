@@ -19,7 +19,7 @@ public class Presenter: PresenterProtocol {
             self.calculatorModel = model
         } else {
             self.calculatorModel = CalculatorModel(
-                userInput: "0",
+                userInput: "",
                 displayText: "0",
                 parameter1: nil,
                 parameter2: nil,

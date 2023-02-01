@@ -15,16 +15,16 @@ public class Configurator {
     private init() {}
 
     func createCalculator(model: CalculatorModel?, viewController: ViewController) {
-            let presenter = Presenter(model: model)
-            let interactor = Interactor()
-            let worker = Worker()
+        let presenter = Presenter(model: model)
+        let interactor = Interactor()
+        let worker = Worker()
 
-            viewController.presenter = presenter
+        viewController.presenter = presenter
 
-            presenter.output = viewController
-            presenter.interactor = interactor
+        presenter.output = viewController
+        presenter.interactor = interactor
 
-            interactor.output = presenter
-            interactor.worker = worker
-        }
+        interactor.output = presenter
+        interactor.worker = worker
+    }
 }
